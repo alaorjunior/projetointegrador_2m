@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Consulta Orçamentária - SOF-v4 (Protótipo)</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Consulta Orçamentária (protótipo) — SOF-v4</h1>
+        <div class="small">Consuma dados públicos da Prefeitura para visualizar despesas por órgão</div>
+      </div>
+
+      <div class="controls">
+        <div class="card" style="display:flex;align-items:center;gap:8px;">
+          <label class="small" style="margin-right:6px">Tema:</label>
+          <div class="badge">Transparência Orçamentária</div>
+          <button id="toggleTheme" class="secondary" style="margin-left:12px">Alternar Tema</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- coluna esquerda: busca e resultados -->
+      <section class="card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input id="qOrgao" type="text" placeholder="Buscar órgão (ex: 'Saúde')" aria-label="Órgão">
+            <select id="qAno" aria-label="Ano">
+              <option value="">Ano (todos)</option>
+            </select>
+            <button id="btnSearch">Buscar</button>
+            <button id="btnClear" class="secondary">Limpar</button>
+          </div>
+          <div class="small">Resultados: <span id="totalCount">0</span></div>
+        </div>
+
+        <div class="filters small" style="margin-bottom:8px">
+          <label><input id="onlyFavorites" type="checkbox"> Mostrar apenas favoritos</label>
+          <div style="flex:1"></div>
+          <div id="lastSync" class="small"></div>
+        </div>
+
+        <div id="resultsArea" class="results" aria-live="polite">
+          <div class="empty">Nenhuma consulta realizada ainda. Pesquise por órgão e/ou ano.</div>
+        </div>
+      </section>
+
+      <!-- coluna direita: favoritos e instruções -->
+      <aside class="card">
+        <h3 style="margin-top:0;margin-bottom:8px">Favoritos</h3>
+        <div id="favList" class="small">
+          <div class="empty">Nenhum favorito salvo.</div>
+        </div>
+
+        <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.04)">
+
+        <div class="small">
+          <strong>Observações técnicas</strong>
+          <ul>
+            <li>Substitua <code>API_BASE</code> no script pelo endpoint real da SOF-v4.</li>
+            <li>Favoritos são salvos no <code>localStorage</code> (protótipo).</li>
+            <li>Verifique CORS e autenticação da API quando integrar em produção.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div>Protótipo — Integração com API SOF-v4</div>
+      <div class="small">Feito para demonstração acadêmica</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+  </body>
+  </html>
