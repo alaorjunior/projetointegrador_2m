@@ -19,7 +19,6 @@ public class ConecaoAPI {
             if (response.isSuccessful()) {
                 String responseData = response.body().string();
                 return responseData.JSON().get('IstOrgaos',[]);
-                // Parse os dados da resposta (JSON, XML, etc.) e use-os em seu programa
             } else {
                 System.out.print("Erro HTTP", responseData_code);
             }
