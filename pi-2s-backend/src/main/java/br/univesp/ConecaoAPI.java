@@ -1,14 +1,22 @@
 package br.univesp;
 
-import com.sun.jdi.request.ExceptionRequest;
-import okhttp3.*;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ConecaoAPI {
     public static void main(String[] args) {
 
-        String url = "http://gateway.apilib.prefeitura.sp.gov.br/sf/sof/v4/orgaos";
+        URL url = new URL("http://gateway.apilib.prefeitura.sp.gov.br/sf/sof/v4/orgaos") ;
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = con.getResponseCode();
 
-//        OkHttpClient client = new OkHttpClient();
         isSuccessful.status = 200;
 
         Request request = new Request.Builder()
@@ -16,14 +24,17 @@ public class ConecaoAPI {
                 .build(ParamsHeaders);
 
         try (Response response = client.newCall(request).execute()) {
+
+            String userJson = ExampleUtils.toJson(user);
+
             if (response.isSuccessful()) {
                 String responseData = response.body().string();
-                return responseData.JSON().get('IstOrgaos',[]);
+                return responseData.JSON().get('IstOrgaos' + []);
             } else {
-                System.out.print("Erro HTTP", responseData_code);
+                System.out.println("Erro HTTP" + responseData_code);
             }
         } catch (Exception e) {
-            InterruptedException;
+            System.out.println("Erro" + e);
         }
     }
 }
