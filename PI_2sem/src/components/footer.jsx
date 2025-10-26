@@ -1,4 +1,4 @@
-import React from 'react';
+import 'src\styles\index.css';
 
 const Footer = () => {
     return (
