@@ -4,8 +4,7 @@ import React from 'react';
 
 // Mantendo e corrigindo o Case Sensitivity (seus arquivos são minúsculos)
 import Header from './components/header'
-import Footer from './components/footer'
-import Card from './components/card'
+import viteLogo from '/vite.svg'
 
 function App() {
   // REMOVENDO: const [count, setCount] = useState(0)
