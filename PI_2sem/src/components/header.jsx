@@ -1,4 +1,4 @@
-import 'src\styles\index.css'
+
 
 const Header = () => {
     return (
