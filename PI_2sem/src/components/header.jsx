@@ -1,4 +1,4 @@
-
+import './src\styles\index.cssact';
 
 const Header = () => {
     return (

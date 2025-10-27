@@ -1,4 +1,4 @@
-
+import './src\styles\index.cssact';
 
 const Card = ({ children, style = {} }) => {
     return (

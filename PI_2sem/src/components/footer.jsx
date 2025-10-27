@@ -1,4 +1,4 @@
-
+import './src\styles\index.cssact';
 
 const Footer = () => {
     return (
