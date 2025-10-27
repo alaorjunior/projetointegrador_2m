@@ -1,63 +1,119 @@
 package br.univesp;
+/**
+   * Jackson / Maven
+*/
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.nio.charset.StandardCharsets;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import static jdk.internal.net.http.HttpRequestImpl.USER_AGENT;
-import com.sun.net.httpserver.Request;
-import class br/univesp/ParamsHeaders.java;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.List;
+import java.util.Map;
 
+/**
+    * Cliente HTTP para consumir a API SOF da Prefeitura de SP.
+ */
 public class ConecaoAPI {
-    public record User() {}
 
-    User user = new User();
-    static String userJson = mapper.writeValueAsString(user);
+    private static final String BASE_URL = "https://gateway.apilib.prefeitura.sp.gov.br/sf/sof/v4";
+    private final HttpClient client;
+    private final ObjectMapper mapper;
 
-    public static void main(String[] args) throws IOException {
+    public ConecaoAPI() {
+        this.client = HttpClient.newBuilder()
+                .version(HttpClient.Version.HTTP_2)
+                .build();
+        this.mapper = new ObjectMapper();
+    }
 
-        URL url = new URL("http://gateway.apilib.prefeitura.sp.gov.br/sf/sof/v4/orgaos") ;
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-        int responseCode = con.getResponseCode();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build(ParamsHeaders);
-
-        if(responseCode == HttpURLConnection.HTTP_OK){
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLinha;
-            StringBuffer response = new StringBuffer();
-
-            while ((inputLinha = in.readLine()) != null ){
-                response.append(inputLinha);
-            }
-            in.close();
-
-            System.out.println(response.toString());
-
-        }else {
-            System.out.println("Conexão não funcionou");
+    private void addHeaders(HttpRequest.Builder builder, Map<String, String> headers) {
+        if (headers != null && !headers.isEmpty()) {
+            headers.forEach(builder::header);
         }
+    }
 
-        try {
-            HttpURLConnection httpURLConnection = (httpURLConnection) url.openConnection();
-            httpURLConnection.setRequestProperty("Content-Type", "application/json");
+    /**
+        * Faz GET /orgaos e interpreta corretamente o JSON retornado pela API.
+     */
+    public List<Orgao> getOrgaos() throws IOException, InterruptedException {
+        String query = toQueryString(ParamsHeaders.getParams());
+        String uri = BASE_URL + "/orgaos" + (query.isEmpty() ? "" : "?" + query);
 
-                try (OutputStream outputStream = httpURLConnection.getOutputStream()) {
-                    outputStream.write(userJson.getBytes(StandardCharsets.UTF_8));
-                    outputStream.flush();
+        HttpRequest.Builder builder = HttpRequest.newBuilder()
+                .uri(URI.create(uri))
+                .GET();
+
+        addHeaders(builder, ParamsHeaders.getHeaders());
+
+        HttpRequest request = builder.build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        int status = response.statusCode();
+        String body = response.body();
+
+        if (status >= 200 && status < 300) {
+            try {
+                // Tenta desserializar diretamente (caso o retorno seja uma lista pura)
+                return mapper.readValue(body, new TypeReference<List<Orgao>>() {});
+            } catch (Exception e) {
+                // Caso venha dentro de um objeto com "lstOrgaos"
+                Map<String, Object> wrapper = mapper.readValue(body, new TypeReference<Map<String, Object>>() {});
+                if (wrapper.containsKey("lstOrgaos")) {
+                    String dataJson = mapper.writeValueAsString(wrapper.get("lstOrgaos"));
+                    return mapper.readValue(dataJson, new TypeReference<List<Orgao>>() {});
+                } else {
+                    throw new IOException("Formato JSON inesperado. Corpo: " + body);
                 }
+            }
+        } else {
+            throw new IOException("GET /orgaos falhou. HTTP " + status + " - " + body);
+        }
+    }
 
-            System.out.println("HTTP status:" + responseCode);
+    private String toQueryString(Map<String, String> params) {
+        if (params == null || params.isEmpty()) return "";
+        return params.entrySet()
+                .stream()
+                .map(entry -> entry.getKey() + "=" + entry.getValue())
+                .reduce((a, b) -> a + "&" + b)
+                .orElse("");
+    }
+
+    /**
+     * POJO representando um órgão conforme o JSON da API.
+     */
+    public static class Orgao {
+        public String codOrgao;
+        public String txtDescricaoOrgao;
+        public String codigoEmpresa;
+        public String descricaoEmpresa;
+
+        @Override
+        public String toString() {
+            return "Orgao{" +
+                    "codOrgao='" + codOrgao + '\'' +
+                    ", txtDescricaoOrgao='" + txtDescricaoOrgao + '\'' +
+                    ", codigoEmpresa='" + codigoEmpresa + '\'' +
+                    ", descricaoEmpresa='" + descricaoEmpresa + '\'' +
+                    '}';
+        }
+    }
+
+    public static void main(String[] args) {
+        ConecaoAPI api = new ConecaoAPI();
+        try {
+            System.out.println("🔹 Chamando GET /orgaos ...");
+            var orgaos = api.getOrgaos();
+
+            System.out.printf("✅ Órgãos retornados: %d%n", orgaos.size());
+            orgaos.stream().limit(10).forEach(System.out::println);
 
         } catch (Exception e) {
-            System.out.println("Erro" + e);
+            System.err.println("❌ Erro ao chamar API: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
