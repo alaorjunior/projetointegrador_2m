@@ -112,7 +112,7 @@ th{color:var(--muted);font-weight:600;font-size:13px}
 .fav-btn.fav{outline:2px solid rgba(22,163,74,0.18)}
 .empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--glass);border-radius:10px}
 
-footer{margin-top:18px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+.footerStyle{margin-top:18px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
 
 @media (min-width:800px){
   main{grid-template-columns: 1fr 420px;}
