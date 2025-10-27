@@ -1,61 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
 
+// REMOVENDO imports não usados (useState, reactLogo, viteLogo, './App.css')
+
+// Mantendo e corrigindo o Case Sensitivity (seus arquivos são minúsculos)
 import Header from './components/header'
 import Footer from './components/footer'
 import Card from './components/card'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // REMOVENDO: const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      {/* ---------------------------------------------------- */}
-      {/* 2. CHAMADA DOS NOVOS COMPONENTES COM DIV ID (Solicitado) */}
+    // A div.container deve ser o ÚNICO elemento raiz (substituindo o <>)
+    // Isso garante que seu CSS de largura e margem funcione
+    <div className="container">
+      
+      {/* O LAYOUT DA APLICAÇÃO COMEÇA AQUI */}
       
       {/* Chamando o componente Header */}
       <div id="header">
         <Header />
       </div>
 
+      <main>
+        {/* Aqui é onde a coluna de busca e resultados deve ir */}
+        
+        {/* Chamando o componente Card (Busca e Filtros) */}
+        <div id="card-busca">
+          <Card>
+            <h2>Busca de Dados (Card)</h2>
+            <p>Este é o conteúdo principal da busca.</p>
+          </Card>
+        </div>
+
+        {/* Chamando o componente Card (Favoritos/Instruções) */}
+        <div id="card-fav">
+          <Card>
+            <h3>Favoritos/Instruções</h3>
+            <p>Conteúdo da coluna lateral.</p>
+          </Card>
+        </div>
+      </main>
+
+
       {/* Chamando o componente Footer */}
       <div id="footer">
         <Footer />
       </div>
 
-      {/* Chamando o componente Card (Exemplo de uso, pois o Card exige conteúdo 'children') */}
-      <div id="card">
-        <Card>
-          <h2>Conteúdo de Teste do Card</h2>
-          <p>Este é o conteúdo passado para o componente Card.</p>
-        </Card>
-      </div>
-
-      {/* ---------------------------------------------------- */}
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
