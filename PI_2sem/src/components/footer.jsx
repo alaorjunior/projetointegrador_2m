@@ -2,7 +2,7 @@ import "../styles/style.css"
 
 const Footer = () => {
     return (
-        <footer id="footerStyle">
+        <footer className="footerStyle">
             {/* Título do Protótipo */}
             <div>Protótipo — Integração com API SOF-v4</div>
             

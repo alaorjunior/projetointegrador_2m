@@ -5,6 +5,8 @@ import React from 'react';
 // Mantendo e corrigindo o Case Sensitivity (seus arquivos são minúsculos)
 import Header from './components/header'
 import viteLogo from '/vite.svg'
+import Card from './components/card';
+import Footer from './components/footer';
 
 function App() {
   // REMOVENDO: const [count, setCount] = useState(0)
@@ -17,23 +19,20 @@ function App() {
       {/* O LAYOUT DA APLICAÇÃO COMEÇA AQUI */}
       
       {/* Chamando o componente Header */}
-      <div id="header">
+      <header>
         <Header />
-      </div>
+      </header>
 
+      {/* Conteúdo principal */}
       <main>
-        {/* Aqui é onde a coluna de busca e resultados deve ir */}
-        
-        {/* Chamando o componente Card (Busca e Filtros) */}
-        <div id="card-busca">
+        <div className="card">
           <Card>
-            <h2>Busca de Dados (Card)</h2>
+            <h2>Busca de Dados</h2>
             <p>Este é o conteúdo principal da busca.</p>
           </Card>
         </div>
 
-        {/* Chamando o componente Card (Favoritos/Instruções) */}
-        <div id="card-fav">
+        <div className="card">
           <Card>
             <h3>Favoritos/Instruções</h3>
             <p>Conteúdo da coluna lateral.</p>
@@ -41,12 +40,10 @@ function App() {
         </div>
       </main>
 
-
-      {/* Chamando o componente Footer */}
-      <div id="footer">
+      {/* Rodapé */}
+      <footer>
         <Footer />
-      </div>
-
+      </footer>
     </div>
   );
 }
