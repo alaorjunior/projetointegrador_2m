@@ -5,22 +5,14 @@ import java.util.Map;
 
 public class ParamsHeaders {
 
-    /**
-        Token fixo da API
-    */
-
     private static final String TOKEN = "d1210d16-bfb8-3450-b8d8-06667329ec70";
 
-    /**
-        Retorna o token completo no formato Bearer para uso no header Authorization.
-     */
+    /*Retorna o token completo no formato Bearer para uso no header Authorization.*/
     public static String getAuthorizationHeader() {
         return "Bearer " + TOKEN;
     }
 
-    /**
-        Retorna um Map com os headers necessários para chamada HTTP.
-     */
+    /*Retorna um Map com os headers necessários para chamada HTTP.*/
     public static Map<String, String> getHeaders() {
         Map<String, String> headers = new HashMap<>();
         headers.put("Authorization", getAuthorizationHeader());
