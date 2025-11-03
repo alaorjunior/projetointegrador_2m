@@ -1,10 +1,6 @@
 package br.univesp;
-/**
-   * Jackson / Maven
-*/
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -13,9 +9,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
 
-/**
-    * Cliente HTTP para consumir a API SOF da Prefeitura de SP.
- */
+/*Cliente HTTP para consumir a API SOF da Prefeitura de SP*/
 public class ConecaoAPI {
 
     private static final String BASE_URL = "https://gateway.apilib.prefeitura.sp.gov.br/sf/sof/v4";
@@ -35,9 +29,7 @@ public class ConecaoAPI {
         }
     }
 
-    /**
-        * Faz GET /orgaos e interpreta corretamente o JSON retornado pela API.
-     */
+    /* Faz GET /orgaos e interpreta corretamente o JSON retornado pela API.*/
     public List<Orgao> getOrgaos() throws IOException, InterruptedException {
         String query = toQueryString(ParamsHeaders.getParams());
         String uri = BASE_URL + "/orgaos" + (query.isEmpty() ? "" : "?" + query);
@@ -82,9 +74,7 @@ public class ConecaoAPI {
                 .orElse("");
     }
 
-    /**
-     * POJO representando um órgão conforme o JSON da API.
-     */
+    /*POJO representando um órgão conforme o JSON da API*/
     public static class Orgao {
         public String codOrgao;
         public String txtDescricaoOrgao;
@@ -108,11 +98,11 @@ public class ConecaoAPI {
             System.out.println("🔹 Chamando GET /orgaos ...");
             var orgaos = api.getOrgaos();
 
-            System.out.printf("✅ Órgãos retornados: %d%n", orgaos.size());
+            System.out.printf("Órgãos retornados: %d%n", orgaos.size());
             orgaos.stream().limit(10).forEach(System.out::println);
 
         } catch (Exception e) {
-            System.err.println("❌ Erro ao chamar API: " + e.getMessage());
+            System.err.println("Erro ao chamar API: " + e.getMessage());
             e.printStackTrace();
         }
     }
