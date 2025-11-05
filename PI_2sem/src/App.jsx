@@ -25,7 +25,9 @@ function App() {
 
       {/* Conteúdo principal */}
       <main>
+
         <div className="card">
+        <doSearch/>
           <Card>
             <h2>Busca de Dados</h2>
             <p>Este é o conteúdo principal da busca.</p>

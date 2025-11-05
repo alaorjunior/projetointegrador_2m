@@ -1,15 +1,13 @@
 import "../styles/style.css";
 
-
-
 const Card = ({ children, style = {} }) => {
     return (
-        <section 
-            className="card" 
+        <section
+            className="card"
             style={style}
         >
-            {children}
-        </section>
+                {children}
+            </section>
     );
 };
 
