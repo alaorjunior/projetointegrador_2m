@@ -52,6 +52,30 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.campoPesquisa{
+  border-radius: 1px black;
+  display:flex;
+  align-items:center;
+}
+
+.btnSearch{
+  color: #16a34a;
+}
+
+.btnSearch:hover{
+  color: var(--accent);
+}
+
+.btnClear{
+  color: #ef4444;
+  border-radius: 1px #b82b2b;
+}
+
+.btnClear:hover{
+  color: #9b1818;
+  border-radius: 1px #8a0909;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -118,9 +142,3 @@ th{color:var(--muted);font-weight:600;font-size:13px}
 
 .badge{display:inline-block;background:rgba(255,255,255,0.04);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted)}
 .loading{display:inline-block;margin-left:8px}
-
-campoPesquisa{
-  border-radius: 1px black;
-  display:flex;
-  align-items:center;
-}

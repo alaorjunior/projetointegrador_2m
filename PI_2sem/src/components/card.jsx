@@ -6,12 +6,8 @@ const Card = ({ children, style = {} }) => {
             className="card"
             style={style}
         >
-                {children}
-        <h3>Favoritos</h3>
-        <div id="favList" class="small">
-        <div class="empty">Nenhum favorito salvo.</div>
-        </div>
-            </section>
+        {children}
+        </section>
     );
 };
 

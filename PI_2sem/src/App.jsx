@@ -1,12 +1,11 @@
-import React from 'react';
 
 // REMOVENDO imports não usados (useState, reactLogo, viteLogo, './App.css')
 
 // Mantendo e corrigindo o Case Sensitivity (seus arquivos são minúsculos)
-import Header from './components/header'
-import viteLogo from '/vite.svg'
+import Search from './components/campoPesquisa';
 import Card from './components/card';
 import Footer from './components/footer';
+import Header from './components/header';
 
 function App() {
   // REMOVENDO: const [count, setCount] = useState(0)
@@ -15,9 +14,9 @@ function App() {
     // A div.container deve ser o ÚNICO elemento raiz (substituindo o <>)
     // Isso garante que seu CSS de largura e margem funcione
     <div className="container">
-      
+
       {/* O LAYOUT DA APLICAÇÃO COMEÇA AQUI */}
-      
+
       {/* Chamando o componente Header */}
       <header>
         <Header />
@@ -27,7 +26,9 @@ function App() {
       <main>
 
         <div className="card">
-        <doSearch/>
+          <div className="campoPesquisa">
+            <Search/>
+          </div>
           <Card>
             <h2>Busca de Dados</h2>
             <p>Este é o conteúdo principal da busca.</p>
