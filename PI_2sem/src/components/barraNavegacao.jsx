@@ -6,7 +6,7 @@ const barraNavegacao = () => {
     return(
         <Routes key={barraItems}>
             <NavLink to="/">{`Home`}</NavLink>
-            <NavLink to="/">{`Consultar despesas`}</NavLink>F
+            <NavLink to="/">{`Consultar despesas`}</NavLink>
         </Routes>
     );
 }
