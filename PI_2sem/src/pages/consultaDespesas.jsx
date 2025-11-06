@@ -3,7 +3,7 @@ import Card from '../components/card';
 import Footer from '../components/footer';
 import Header from '../components/header';
 
-const pageConsultas = () => {
+const consultaDespesas = () => {
     return (
         <>
             <Header />;
@@ -14,4 +14,4 @@ const pageConsultas = () => {
     );
 }
 
-export default pageConsultas;
+export default consultaDespesas;

@@ -1,20 +1,20 @@
-import Homepage from "./pages/Homepage";
-import pageConsultas from "./pages/pageConsultas";
+import consultaDespesas from './pages/consultaDespesas';
+import Homepage from './pages/Homepage';
 
-const rotasSite = () => {
+const Routes = () => {
     return (
         <BrowserRoutes>
             <nav>
                 <link to="/"><Homepage /></link>
-                <link to="/"><pageConsultas /></link>
+                <link to="/"><consultaDespesas /></link>
             </nav>
 
             <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/ConsultasDespesas" element={<pageConsultas />} />
+                <Route path="/Home" element={<Homepage />} />
+                <Route path="/ConsultasDespesas" element={<consultaDespesas />} />
             </Routes>
         </BrowserRoutes>
     );
 }
 
-export default rotasSite;
+export default Routes;

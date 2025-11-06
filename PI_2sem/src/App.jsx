@@ -1,4 +1,3 @@
-
 // REMOVENDO imports não usados (useState, reactLogo, viteLogo, './App.css')
 
 // Mantendo e corrigindo o Case Sensitivity (seus arquivos são minúsculos)
@@ -6,7 +5,7 @@ import Search from './components/campoPesquisa';
 import Card from './components/card';
 import Footer from './components/footer';
 import Header from './components/header';
-import rotasSite from './Routes';
+import Routes from './Routes';
 
 function App() {
   // REMOVENDO: const [count, setCount] = useState(0)
@@ -28,8 +27,9 @@ function App() {
 
         <div className="card">
           <div className="campoPesquisa">
-            <Search/>
+            <Search />
           </div>
+
           <Card>
             <h2>Busca de Dados</h2>
             <p>Este é o conteúdo principal da busca.</p>
@@ -42,9 +42,10 @@ function App() {
             <p>Conteúdo da coluna lateral.</p>
           </Card>
         </div>
-        <rotasSite/>
+
+        <Routes />
+
       </main>
-     
 
       {/* Rodapé */}
       <footer>
