@@ -1,18 +1,20 @@
 import Homepage from "./pages/Homepage";
 import pageConsultas from "./pages/pageConsultas";
 
-const routasSite = () => {
+const rotasSite = () => {
     return (
         <BrowserRoutes>
             <nav>
-                <link to="/"><Home/></link>
-                <link to="/"><pageConsultas/></link>
+                <link to="/"><Homepage /></link>
+                <link to="/"><pageConsultas /></link>
             </nav>
 
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Homepage />} />
                 <Route path="/ConsultasDespesas" element={<pageConsultas />} />
             </Routes>
         </BrowserRoutes>
     );
 }
+
+export default rotasSite;

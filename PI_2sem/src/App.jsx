@@ -6,6 +6,7 @@ import Search from './components/campoPesquisa';
 import Card from './components/card';
 import Footer from './components/footer';
 import Header from './components/header';
+import rotasSite from './Routes';
 
 function App() {
   // REMOVENDO: const [count, setCount] = useState(0)
@@ -41,6 +42,7 @@ function App() {
             <p>Conteúdo da coluna lateral.</p>
           </Card>
         </div>
+        <rotasSite/>
       </main>
 
       {/* Rodapé */}

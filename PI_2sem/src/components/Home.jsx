@@ -11,7 +11,7 @@ const Home = () => {
                 </div>
             </section>
             <section>
-                <div>
+                <div className="section2">
                     <h2>Proposito</h2>
                     <p>text</p>
                 </div>
