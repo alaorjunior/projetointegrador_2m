@@ -5,18 +5,25 @@ async function doSearch() {
     const [orgao, setOrgao] = useState('');
     const [results, setResults] = useState([]);
     const [lastSync, setLastSync] = useState(null);
+    const url = `${api}/despesas?${params.toString()}`;
 
     if(orgao)params.append('orgao',orgao)
     if(ano)params.append('ano',ano);
-        params.append('limit',100);
+    params.append('limit',100);
 
-    try{
-        currentResults=data.map(normalizeItem);
-        totalCountEl.textContent=currentResults.length;
-        lastSync.textContent='Última consulta: '+new Date().toLocaleString();
-        renderResults(currentResults);
-    }catch (e){resultsArea.innerHTML};
-}
+try {
+    const res = await fetch(url);
+    const json = await res.json();
+    const data = Array.isArray(json) ? json : json.data || [];
+
+    const currentResults = data.map(normalizeItem);
+    setResults(currentResults);
+    setLastSync(new Date().toLocaleString());
+    } catch (error) {
+    console.error('Erro ao buscar dados:', error);
+    }
+};
+
 
     return(
         <>

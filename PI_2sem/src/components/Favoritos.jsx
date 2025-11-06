@@ -1,12 +1,11 @@
 import "../styles/style.css";
 
-const Card = ({ children, style = {} }) => {
+const Favoritos = () => {
     return (
         <section
             className="card"
             style={style}
         >
-                {children}
         <h3>Favoritos</h3>
         <div id="favList" class="small">
         <div class="empty">Nenhum favorito salvo.</div>
@@ -15,4 +14,4 @@ const Card = ({ children, style = {} }) => {
     );
 };
 
-export default Card;
+export default Favoritos;
