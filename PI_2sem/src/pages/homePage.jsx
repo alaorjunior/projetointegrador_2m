@@ -1,13 +1,13 @@
-import Home from './components/Home';
+import Footer from './components/footer';
 import Header from './components/header';
-import Footer from '../components/footer';
+import Home from './components/Home';
 
 const Homepage = () => {
     return (
         <>
-        <Header/>;
-        <Home/>;
-        <Footer />
+            <Header />;
+            <Home />;
+            <Footer />
         </>
     );
 }
