@@ -1,10 +1,11 @@
+// src/pages/consultaDespesas.jsx
 import Header from "../components/header";
 import BarraNavegacao from "../components/barraNavegacao";
 import CampoPesquisa from "../components/campoPesquisa";
 import Card from "../components/card";
 import Footer from "../components/footer";
 
-const PageConsultas = () => {
+const ConsultaDespesas = () => {
   return (
     <>
       <Header />
@@ -19,4 +20,5 @@ const PageConsultas = () => {
   );
 };
 
-export default PageConsultas;
+export default ConsultaDespesas;
+
