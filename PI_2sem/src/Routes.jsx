@@ -1,20 +1,16 @@
-import Homepage from "./pages/Homepage";
-import pageConsultas from "./pages/pageConsultas";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Homepage from "./pages/homePage";
+import PageConsultas from "./pages/pageConsultas";
 
-const rotasSite = () => {
-    return (
-        <BrowserRoutes>
-            <nav>
-                <link to="/"><Homepage /></link>
-                <link to="/"><pageConsultas /></link>
-            </nav>
+const RotasSite = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/consultar-despesas" element={<PageConsultas />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-            <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/ConsultasDespesas" element={<pageConsultas />} />
-            </Routes>
-        </BrowserRoutes>
-    );
-}
-
-export default rotasSite;
+export default RotasSite;
