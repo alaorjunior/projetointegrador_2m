@@ -140,9 +140,16 @@ nav a {
 }
 
 nav a.active {
+  color: var(--text); /* deixa o link ativo (Home) branco */
+  border-bottom: 2px solid transparent; /* remove sublinhado verde */
+}
+
+nav a:hover,
+nav a.active:hover {
   color: var(--accent);
   border-bottom: 2px solid var(--accent);
 }
+
 
 nav a:hover {
   color: var(--accent);

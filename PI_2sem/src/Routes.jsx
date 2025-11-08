@@ -1,13 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/homePage";
-import PageConsultas from "./pages/pageConsultas";
+import ConsultaDespesas from "./pages/consultaDespesas";
+
 
 const RotasSite = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/consultar-despesas" element={<PageConsultas />} />
+        <Route path="/consultar-despesas" element={<ConsultaDespesas />} />
+
       </Routes>
     </BrowserRouter>
   );
