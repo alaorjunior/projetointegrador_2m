@@ -119,7 +119,6 @@ th{color:var(--muted);font-weight:600;font-size:13px}
 .badge{display:inline-block;background:rgba(255,255,255,0.04);padding:6px 8px;border-radius:999px;font-size:12px;color:var(--muted)}
 .loading{display:inline-block;margin-left:8px}
 
-<<<<<<< HEAD
 /* Barra de Navegação */
 nav {
   display: flex;
