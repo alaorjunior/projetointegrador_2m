@@ -6,7 +6,6 @@ import "./styles/style.css";
 function App() {
   return (
     <div className="container">
-      <Header />
       <main>
         <RotasSite />
       </main>

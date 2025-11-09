@@ -11,12 +11,7 @@ const ConsultaDespesas = () => {
       <Header />
       <BarraNavegacao />
       <CampoPesquisa />
-      <Card>
-        <h2>Resultados da Consulta</h2>
-        <p>Preencha os campos e clique em “Buscar” para ver os resultados.</p>
-      </Card>
-      <Footer />
-    </>
+      </>
   );
 };
 
