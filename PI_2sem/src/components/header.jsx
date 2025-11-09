@@ -1,43 +1,42 @@
-import "../styles/style.css";
+import { useEffect, useState } from "react";
 
-const Header = () => {
+export default function Header() {
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "dark"
+  );
+
+  // Aplica o tema ao body
+  useEffect(() => {
+    document.body.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
   const toggleTheme = () => {
-    const currentTheme = document.body.getAttribute("data-theme");
-    document.body.setAttribute("data-theme", currentTheme === "light" ? "dark" : "light");
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   return (
-    <header>
-      {/* Primeira div: Títulos */}
-      <div>
-        <h1>Consulta Orçamentária (protótipo) — SOF-v4</h1>
-        <div className="small">
-          Consuma dados públicos da Prefeitura para visualizar despesas por órgão
-        </div>
-      </div>
+    <header className="headerContainer container">
+      <h1 className="text-xl font-semibold tracking-tight">Painel de Controle</h1>
 
-      {/* Controles e Tema */}
-      <div className="controls">
-        <div
-          className="card"
-          style={{ display: "flex", alignItems: "center", gap: "8px" }}
-        >
-          <label className="small" style={{ marginRight: "6px" }}>
-            Tema:
-          </label>
-          <div className="badge">Transparência Orçamentária</div>
-          <button
-            id="toggleTheme"
-            className="secondary"
-            style={{ marginLeft: "12px" }}
-            onClick={toggleTheme} // ✅ evento do botão
-          >
-            Alternar Tema
-          </button>
-        </div>
+      <nav>
+        <a href="#" className="active">
+          Início
+        </a>
+        <a href="#">Relatórios</a>
+        <a href="#">Configurações</a>
+      </nav>
+
+      <div className="theme-switcher">
+        <button onClick={toggleTheme} className="themeButton">
+          <span className="themeIcon">
+            {theme === "dark" ? "🌙" : "☀️"}
+          </span>
+          <span className="themeText">
+            {theme === "dark" ? "Modo Escuro" : "Modo Claro"}
+          </span>
+        </button>
       </div>
     </header>
   );
-};
-
-export default Header;
+}
