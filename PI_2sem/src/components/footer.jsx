@@ -1,32 +1,47 @@
-export default function Footer() {
+import {
+  toggleHighContrast,
+  increaseFontSize,
+  startScreenReader,
+} from "../utils/acessibilidade";
+
+const Footer = () => {
   return (
-    <footer>
-      <div className="footer-container">
+    <footer role="contentinfo" className="site-footer">
+      <div className="container footer-grid" role="navigation" aria-label="Rodapé">
         <div className="footer-column">
-          <h4>Acessibilidade</h4>
-          <a href="#">Modo Alto Contraste</a>
-          <a href="#">Tamanho da Fonte</a>
-          <a href="#">Leitor de Tela</a>
+          <h3>Acessibilidade</h3>
+          <ul>
+            <li><a href="#" onClick={toggleHighContrast}>Modo Alto Contraste</a></li>
+            <li><a href="#" onClick={increaseFontSize}>Aumentar Fonte</a></li>
+            <li><a href="#" onClick={startScreenReader}>Leitor de Tela</a></li>
+          </ul>
         </div>
 
         <div className="footer-column">
-          <h4>Mapa do Site</h4>
-          <a href="#">Início</a>
-          <a href="#">Relatórios</a>
-          <a href="#">Configurações</a>
+          <h3>Consulta</h3>
+          <ul>
+            <li><a href="/consulta-despesas">Despesas</a></li>
+            <li><a href="/consulta-empenhos">Empenhos</a></li>
+          </ul>
         </div>
 
         <div className="footer-column">
-          <h4>Contato</h4>
-          <a href="#">Suporte</a>
-          <a href="#">Privacidade</a>
-          <a href="#">Termos de Uso</a>
+          <h3>Contato</h3>
+          <ul>
+            <li><a href="#">Suporte</a></li>
+            <li><a href="#">Privacidade</a></li>
+            <li><a href="#">Termos de Uso</a></li>
+          </ul>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Seu Projeto — Todos os direitos reservados.</p>
+        © 2025 — Portal de Transparência Pública — Uso acadêmico.
+        <br />
+        Desenvolvido para fins educacionais, com foco em acessibilidade e transparência.
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;

@@ -1,17 +1,11 @@
-import Header from "../components/header";
-import BarraNavegacao from "../components/barraNavegacao";
 import Home from "../components/home";
-import Footer from "../components/footer";
 
-const Homepage = () => {
+const HomePage = () => {
   return (
-    <>
-      <Header />
-      <BarraNavegacao />
+    <section className="page-wrap">
       <Home />
-      <Footer />
-    </>
+    </section>
   );
 };
 
-export default Homepage;
+export default HomePage;

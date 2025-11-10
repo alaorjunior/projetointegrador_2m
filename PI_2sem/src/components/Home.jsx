@@ -1,28 +1,25 @@
-import React from "react";
-import "../styles/style.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <>
-      <section aria-labelledby="home-title">
-        <h2 id="home-title">Consulta de Despesas Públicas</h2>
-      </section>
+    <section className="home-section" role="region" aria-label="Página inicial">
+      <div className="home-content">
+        <h2>Consulta de Despesas Públicas</h2>
+        <p>
+          Veja como os recursos públicos são aplicados de forma transparente e acessível.
+        </p>
+      </div>
 
-      <section aria-labelledby="sec-o-que-sao">
-        <div className="section1">
-          <h3 id="sec-o-que-sao">Você sabe o que são Despesas Públicas?</h3>
-          <p><i>Despesas públicas são todos os gastos que o governo faz para cuidar do país — como pagar salários de servidores, construir escolas, hospitais, estradas e oferecer serviços à população.</i></p>
-        </div>
-      </section>
-
-      <section aria-labelledby="sec-prototipo">
-        <div className="section2">
-          <h3 id="sec-prototipo">Protótipo</h3>
-          <p className="small">Protótipo para demonstração de integração com API SOF-v4.</p>
-        </div>
-      </section>
-    </>
+      <div className="home-buttons">
+        <Link to="/consulta-despesas" className="btn-acesso">
+          Consultar Despesas
+        </Link>
+        <Link to="/consulta-empenhos" className="btn-acesso">
+          Consultar Empenhos
+        </Link>
+      </div>
+    </section>
   );
-}
+};
 
 export default Home;

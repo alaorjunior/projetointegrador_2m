@@ -1,18 +1,22 @@
-// src/pages/consultaDespesas.jsx
-import Header from "../components/header";
-import BarraNavegacao from "../components/barraNavegacao";
 import CampoPesquisa from "../components/campoPesquisa";
-import Card from "../components/card";
-import Footer from "../components/footer";
 
 const ConsultaDespesas = () => {
   return (
-    <>
-      <Header />
-      <BarraNavegacao />
-      <CampoPesquisa />
-      <Footer/>
-      </>
+    <section className="page-wrap">
+      <h2 className="page-title">Consulta de Despesas Públicas</h2>
+      <p className="page-subtitle">
+        Utilize os filtros abaixo para consultar os gastos públicos de forma transparente.
+      </p>
+
+      <div className="filters-area">
+        <CampoPesquisa type="despesas" />
+
+        <div className="filter-buttons">
+          <button className="btn-primary">Consultar Despesas</button>
+          <button className="btn-secondary">Limpar Filtros</button>
+        </div>
+      </div>
+    </section>
   );
 };
 
