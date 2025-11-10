@@ -13,6 +13,15 @@ export function increaseFontSize() {
   localStorage.setItem("font-scale", newSize.toString());
 }
 
+// 🔽 Diminui o tamanho da fonte geral
+export function decreaseFontSize() {
+  const currentSize = parseFloat(localStorage.getItem("font-scale") || "1");
+  const newSize = Math.max(currentSize - 0.1, 0.8);
+  document.body.style.transform = `scale(${newSize})`;
+  document.body.style.transformOrigin = "top left";
+  localStorage.setItem("font-scale", newSize.toString());
+}
+
 // Simula leitor de tela com SpeechSynthesis (nativo do Chrome)
 export function startScreenReader() {
   if (!window.speechSynthesis) {

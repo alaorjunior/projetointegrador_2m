@@ -1,6 +1,7 @@
 import {
   toggleHighContrast,
   increaseFontSize,
+  decreaseFontSize,
   startScreenReader,
 } from "../utils/acessibilidade";
 
@@ -13,6 +14,7 @@ const Footer = () => {
           <ul>
             <li><a href="#" onClick={toggleHighContrast}>Modo Alto Contraste</a></li>
             <li><a href="#" onClick={increaseFontSize}>Aumentar Fonte</a></li>
+            <li><a href="#" onClick={decreaseFontSize}>Diminuir Fonte</a></li>
             <li><a href="#" onClick={startScreenReader}>Leitor de Tela</a></li>
           </ul>
         </div>
