@@ -19,6 +19,7 @@ const BarraNavegacao = () => {
     <nav aria-label="Menu principal" role="navigation">
       <NavLink to="/" className={({isActive}) => isActive ? "active" : ""}>Home</NavLink>
       <NavLink to="/consultar-despesas" className={({isActive}) => isActive ? "active" : ""}>Consultar Despesas</NavLink>
+      <NavLink to="/consultar-empenhos" className={({isActive}) => isActive ? "active" : ""}>Consultar Empenhos</NavLink>
 
       <div style={{ marginLeft: "auto" }} aria-hidden="true" />
       <button
