@@ -11,9 +11,9 @@ const ConsultaDespesas = () => {
       <Header />
       <BarraNavegacao />
       <CampoPesquisa />
+      <Footer/>
       </>
   );
 };
 
 export default ConsultaDespesas;
-
