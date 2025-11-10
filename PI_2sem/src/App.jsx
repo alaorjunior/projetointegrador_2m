@@ -10,14 +10,12 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        <Header />
         <main className="content">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/consulta-despesas" element={<ConsultaDespesas />} />
           </Routes>
         </main>
-        <Footer />
       </div>
     </Router>
   );
