@@ -286,3 +286,13 @@ a:focus-visible {
   justify-content: left;
   align-content: first baseline;
 }
+
+.headerContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--card-bg);
+  border-bottom: 2px solid var(--link-color);
+  box-sizing: border-box;
+}
