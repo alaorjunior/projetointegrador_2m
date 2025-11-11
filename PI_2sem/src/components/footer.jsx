@@ -38,9 +38,9 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        © 2025 — Portal de Transparência Pública — Uso acadêmico.
+        © 2025 — Portal de Transparência Pública Orçamentária — Uso acadêmico.
         <br />
-        Desenvolvido para fins educacionais, com foco em acessibilidade e transparência.
+        Desenvolvido para fins educacionais, com foco na Transparência Pública de Dados Orçamentários.
       </div>
     </footer>
   );
