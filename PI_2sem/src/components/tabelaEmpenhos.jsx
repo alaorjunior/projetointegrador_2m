@@ -55,6 +55,7 @@ export default function EmpenhosPorOrgao() {
   };
 
   return (
+    <div className="tabelaDesp">
     <div className="p-6 max-w-6xl mx-auto space-y-4">
 
       {/* SELECT */}
@@ -104,6 +105,7 @@ export default function EmpenhosPorOrgao() {
           )}
         </div>
       )}
+    </div>
     </div>
   );
 }

@@ -146,7 +146,7 @@ const TabelaDespesas = () => {
 
       {/* FAVORITOS */}
       <section className="favoritos-section">
-        <h3>Favoritos ({favoritosArray.length})</h3>
+        <h3 className="tituloFav">Favoritos ({favoritosArray.length})</h3>
 
         {favoritosArray.length === 0 ? (
           <p>Nenhum favorito.</p>
@@ -166,7 +166,7 @@ const TabelaDespesas = () => {
                 </button>
 
                 <button
-                  className="fav-btn fav"
+                  className="fav-btn fav" id="removeFav"
                   onClick={() => alternarFavorito(fav)}
                 >
                   ★

@@ -162,13 +162,32 @@ main.content {
 
 .home-section {
   display: flex;
-  flex-direction: column; /* empilha os elementos verticalmente */
-  gap: 20px; /* espaçamento vertical entre eles */
+  flex-direction: column;
+  /* empilha os elementos verticalmente */
+  gap: 20px;
+  /* espaçamento vertical entre eles */
+}
+
+.section2 {
+  margin: 5px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.text2 {
+  text-align: justify;
+  margin-top: 5px;
 }
 
 .home-buttons {
   display: flex;
   gap: 25px;
+}
+
+.btn-acesso:hover {
+  color: #c3e0e4;
+  background-color: #0066cc;
+  border-radius: 6px;
 }
 
 /* ===== Estilo da Tabela de Despesas ===== */
@@ -212,6 +231,35 @@ main.content {
   z-index: 1;
 }
 
+.tabela-despesas, .tabelaDesp {
+  background-color: #111111;
+}
+
+.fav-btn:hover {
+  background-color: #00bcd4;
+  border: #0066cc 1px;
+}
+
+.removeFav:hover {
+  background-color: #881f1f;
+}
+
+.favoritos-section {
+  margin-top: 24.5px;
+  background-color: #2b2b2b;
+  width: 30%;
+  justify-content: center;
+}
+
+.tituloFav {
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.lista-favoritos {
+  list-style-type: none;
+}
+
 /* =========================================
    FOOTER
 ========================================= */
@@ -236,6 +284,7 @@ main.content {
 
 .footer-column ul {
   list-style: none;
+  list-style-type: none;
 }
 
 .footer-column li {
