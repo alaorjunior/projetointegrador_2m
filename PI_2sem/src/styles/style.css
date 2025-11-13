@@ -160,6 +160,58 @@ main.content {
   margin-bottom: 1rem;
 }
 
+.home-section {
+  display: flex;
+  flex-direction: column; /* empilha os elementos verticalmente */
+  gap: 20px; /* espaçamento vertical entre eles */
+}
+
+.home-buttons {
+  display: flex;
+  gap: 25px;
+}
+
+/* ===== Estilo da Tabela de Despesas ===== */
+
+.main-container {
+  display: flex;
+  gap: 30px;
+}
+
+.tabela-despesas {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  text-align: left;
+}
+
+.tabela-despesas th {
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.tabela-despesas td {
+  padding: 10px 12px;
+}
+
+/* Alinhamento específico */
+.tabela-despesas td.valor {
+  text-align: right;
+  font-weight: 500;
+}
+
+.tabela-despesas td.data {
+  text-align: center;
+}
+
+/* Cabeçalho fixo (opcional) */
+.tabela-despesas thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 /* =========================================
    FOOTER
 ========================================= */

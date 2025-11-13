@@ -1,114 +1,183 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";   // ⬅️ IMPORTANTE
+import "../styles/style.css";
 
-const CampoPesquisa = ({ type }) => {
-  const [orgao, setOrgao] = useState("");
-  const [ano, setAno] = useState("");
-  const [loading, setLoading] = useState(false);
+const TabelaDespesas = () => {
+  const navigate = useNavigate(); // ⬅️ PARA REDIRECIONAR
+  const LS_FAV_KEY = "sof_favoritos_v1";
+
   const [dados, setDados] = useState([]);
+  const [erro, setErro] = useState(null);
+  const [carregando, setCarregando] = useState(true);
+  const [favoritos, setFavoritos] = useState({});
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
+  // Carrega favoritos
+  useEffect(() => {
     try {
-      const endpoint =
-        type === "despesas"
-          ? `https://gateway.apilib.prefeitura.sp.gov.br/sf/sof/v4/despesas`
-          : `https://gateway.apilib.prefeitura.sp.gov.br/sf/sof/v4/empenhos`;
-
-      const url = `${endpoint}?orgao=${orgao}&ano=${ano}`;
-      const resposta = await fetch(url);
-      const json = await resposta.json();
-      setDados(json || []);
-    } catch (erro) {
-      console.error("Erro ao buscar dados:", erro);
-      setDados([]);
-    } finally {
-      setLoading(false);
+      const stored = JSON.parse(localStorage.getItem(LS_FAV_KEY)) || {};
+      setFavoritos(stored);
+    } catch {
+      setFavoritos({});
     }
+  }, []);
+
+  // Busca dados JSON
+  useEffect(() => {
+    const carregarDados = async () => {
+      try {
+        const res = await fetch("/assets/resultado.json", { cache: "no-store" });
+        if (!res.ok) throw new Error(`Erro HTTP ${res.status}`);
+        const data = await res.json();
+
+        const lista = data.map((item) => {
+          const org = item.orgao || {};
+          const despesas = Array.isArray(item.despesas) ? item.despesas : [];
+          const empenhos = Array.isArray(item.empenhos) ? item.empenhos : [];
+
+          const codOrgao = org.codOrgao || "(sem código)";
+          const nomeOrgao = org.txtDescricaoOrgao || "(sem nome)";
+
+          const totalDespesas = despesas.reduce((s, d) => {
+            const val = parseFloat(d.valLiquidado) || 0;
+            return s + val;
+          }, 0);
+
+          return {
+            id: `${codOrgao}-${nomeOrgao}`,
+            codOrgao,
+            orgao: nomeOrgao,
+            valorTotal: totalDespesas,
+            qtdEmpenhos: empenhos.length,
+          };
+        });
+
+        const agrupado = lista.reduce((acc, item) => {
+          const chave = `${item.codOrgao}-${item.orgao}`.toLowerCase().trim();
+          if (!acc[chave]) {
+            acc[chave] = {
+              id: chave,
+              codOrgao: item.codOrgao,
+              orgao: item.orgao,
+              valorTotal: 0,
+              qtdEmpenhos: 0,
+            };
+          }
+          acc[chave].valorTotal += item.valorTotal;
+          acc[chave].qtdEmpenhos += item.qtdEmpenhos;
+          return acc;
+        }, {});
+
+        setDados(Object.values(agrupado));
+      } catch (e) {
+        console.error(e);
+        setErro("Erro ao carregar dados: " + e.message);
+      } finally {
+        setCarregando(false);
+      }
+    };
+
+    carregarDados();
+  }, []);
+
+  const salvarFavoritos = (novos) => {
+    setFavoritos(novos);
+    localStorage.setItem(LS_FAV_KEY, JSON.stringify(novos));
   };
 
+  const alternarFavorito = (item) => {
+    const novos = { ...favoritos };
+    if (novos[item.id]) delete novos[item.id];
+    else novos[item.id] = item;
+    salvarFavoritos(novos);
+  };
+
+  const formatarMoeda = (valor) =>
+    isNaN(valor)
+      ? "—"
+      : valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+  const favoritosArray = Object.values(favoritos);
+
+  // Totais gerais
+  const totalEmpenhos = dados.reduce((s, it) => s + it.qtdEmpenhos, 0);
+  const totalGeral = dados.reduce((s, it) => s + it.valorTotal, 0);
+
+  if (carregando) return <div>Carregando...</div>;
+  if (erro) return <div>{erro}</div>;
+
   return (
-    <section className="card pesquisa-section">
-      <h2 className="titulo-secao">
-        {type === "despesas"
-          ? "Consulta de Despesas Públicas"
-          : "Consulta de Empenhos"}
-      </h2>
+    <section className="main-container">
+      {/* tabela */}
+      <section className="tabela-container">
 
-      <p className="descricao-secao">
-        {type === "despesas"
-          ? "Veja como os recursos públicos são aplicados de forma transparente."
-          : "Acompanhe os compromissos e valores empenhados pelo governo municipal."}
-      </p>
+      <br />
 
-      <form onSubmit={handleSubmit} className="filtro-form" aria-label="Formulário de pesquisa">
-        <div className="campo-form">
-          <label htmlFor={`orgao-${type}`} className="label-form">Órgão:</label>
-          <input
-            type="text"
-            id={`orgao-${type}`}
-            name="orgao"
-            value={orgao}
-            onChange={(e) => setOrgao(e.target.value)}
-            placeholder="Digite o nome do órgão"
-            aria-label="Campo para inserir o nome do órgão"
-          />
-        </div>
-
-        <div className="campo-form">
-          <label htmlFor={`ano-${type}`} className="label-form">Ano:</label>
-          <select
-            id={`ano-${type}`}
-            name="ano"
-            value={ano}
-            onChange={(e) => setAno(e.target.value)}
-            aria-label="Selecione o ano"
-          >
-            <option value="">Selecione o ano</option>
-            {[2025, 2024, 2023, 2022, 2021].map((ano) => (
-              <option key={ano} value={ano}>
-                {ano}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <button type="submit" disabled={loading}>
-          {loading ? "Consultando..." : "Consultar"}
-        </button>
-      </form>
-
-      <div className="resultados">
-        {loading && <p>Carregando resultados...</p>}
-        {!loading && dados.length === 0 && (
-          <p className="small">Nenhum dado encontrado.</p>
-        )}
-        {!loading && dados.length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                <th>Órgão</th>
-                <th>Descrição</th>
-                <th>Valor</th>
-                <th>Ano</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dados.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.orgao || "-"}</td>
-                  <td>{item.descricao || "-"}</td>
-                  <td>{item.valor || "-"}</td>
-                  <td>{item.ano || "-"}</td>
+        <table className="tabela-despesas">
+          <thead>
+            <tr>
+              <th>Órgão</th>
+              <th>Total de Despesas</th>
+              <th>Qtd Empenhos</th>
+              <th>Favorito</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dados.map((it) => {
+              const isFav = !!favoritos[it.id];
+              return (
+                <tr key={it.id}>
+                  <td>{it.orgao}</td>
+                  <td>{formatarMoeda(it.valorTotal)}</td>
+                  <td>{it.qtdEmpenhos}</td>
+                  <td>
+                    <button
+                      className={`fav-btn ${isFav ? "fav" : ""}`}
+                      onClick={() => alternarFavorito(it)}
+                    >
+                      {isFav ? "★" : "☆"}
+                    </button>
+                  </td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
+
+      {/* FAVORITOS */}
+      <section className="favoritos-section">
+        <h3>Favoritos ({favoritosArray.length})</h3>
+
+        {favoritosArray.length === 0 ? (
+          <p>Nenhum favorito.</p>
+        ) : (
+          <ul className="lista-favoritos">
+            {favoritosArray.map((fav) => (
+              <li key={fav.id}>
+                <button
+                  className="link-fav"
+                  onClick={() =>
+                    navigate("/consulta-empenhos", {
+                      state: { codOrgao: fav.codOrgao }, // ⬅️ envia o filtro
+                    })
+                  }
+                >
+                  {fav.orgao}
+                </button>
+
+                <button
+                  className="fav-btn fav"
+                  onClick={() => alternarFavorito(fav)}
+                >
+                  ★
+                </button>
+              </li>
+            ))}
+          </ul>
         )}
-      </div>
+      </section>
     </section>
   );
 };
 
-export default CampoPesquisa;
+export default TabelaDespesas;
