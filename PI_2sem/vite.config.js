@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: "/projetointegrador_2m/", // 👈 adiciona essa linha
   css: {
     postcss: "./postcss.config.js", // ✅ Garante que o Vite use o PostCSS correto
   },
