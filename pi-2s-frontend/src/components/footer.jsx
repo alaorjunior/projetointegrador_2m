@@ -3,12 +3,14 @@ import {
   increaseFontSize,
   decreaseFontSize,
   startScreenReader,
+  stopScreenReader
 } from "../utils/acessibilidade";
 
 const Footer = () => {
   return (
     <footer role="contentinfo" className="site-footer">
       <div className="container footer-grid" role="navigation" aria-label="Rodapé">
+        
         <div className="footer-column">
           <h3>Acessibilidade</h3>
           <ul>
@@ -16,6 +18,7 @@ const Footer = () => {
             <li><a href="#" onClick={increaseFontSize}>Aumentar Fonte</a></li>
             <li><a href="#" onClick={decreaseFontSize}>Diminuir Fonte</a></li>
             <li><a href="#" onClick={startScreenReader}>Leitor de Tela</a></li>
+            <li><a href="#" onClick={stopScreenReader}>Parar Leitura</a></li>
           </ul>
         </div>
 

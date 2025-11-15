@@ -21,7 +21,7 @@
 [data-theme="light"] {
   --bg-color: #f9f9f9;
   --text-color: #222222;
-  --card-bg: #ffffff;
+  --card-bg: #f2f2f2; /* ⭐ OPÇÃO A — Cinza suave aplicado */
   --footer-bg: #e0e0e0;
   --link-color: #007acc;
   --border-color: #cccccc;
@@ -163,9 +163,7 @@ main.content {
 .home-section {
   display: flex;
   flex-direction: column;
-  /* empilha os elementos verticalmente */
   gap: 20px;
-  /* espaçamento vertical entre eles */
 }
 
 .section2 {
@@ -214,7 +212,6 @@ main.content {
   padding: 10px 12px;
 }
 
-/* Alinhamento específico */
 .tabela-despesas td.valor {
   text-align: right;
   font-weight: 500;
@@ -224,15 +221,31 @@ main.content {
   text-align: center;
 }
 
-/* Cabeçalho fixo (opcional) */
 .tabela-despesas thead th {
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
-.tabela-despesas, .tabelaDesp {
-  background-color: #111111;
+/* ===== CORREÇÃO MÍNIMA: usar a variável de tema (antes havia #111111) ===== */
+.tabela-despesas,
+.tabelaDesp {
+  background-color: var(--card-bg);
+}
+
+/* Anular bg-white do Tailwind apenas dentro de tabelaEmpenhos (.tabelaDesp)
+   para que o painel de empenhos acompanhe o tema sem mexer no JSX */
+.tabelaDesp .overflow-x-auto.bg-white,
+.tabelaDesp .overflow-x-auto {
+  background-color: var(--card-bg) !important;
+}
+
+/* Garantir cor do texto dentro das tabelas/painéis */
+.tabela-despesas,
+.tabelaDesp,
+.tabela-despesas td,
+.tabelaDesp td {
+  color: var(--text-color);
 }
 
 .fav-btn:hover {
@@ -244,11 +257,13 @@ main.content {
   background-color: #881f1f;
 }
 
+/* ===== CORREÇÃO MÍNIMA: favoritos acompanham o tema (antes havia #2b2b2b) ===== */
 .favoritos-section {
   margin-top: 24.5px;
-  background-color: #2b2b2b;
+  background-color: var(--card-bg);
   width: 30%;
   justify-content: center;
+  padding: 0.5rem;
 }
 
 .tituloFav {
@@ -324,7 +339,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Aumentar legibilidade quando a fonte for ampliada */
 body[style*="scale("] * {
   line-height: 1.5 !important;
 }
@@ -396,4 +410,20 @@ a:focus-visible {
   background-color: var(--card-bg);
   border-bottom: 2px solid var(--link-color);
   box-sizing: border-box;
+}
+
+
+/* Garantir que o Tailwind não quebre o tema */
+[data-theme="light"] body,
+[data-theme="light"] * {
+  background-color: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+/* Restituir o bg dos cards sem exagero */
+.card,
+.tabela-despesas,
+.tabelaDesp,
+.favoritos-section {
+  background-color: var(--card-bg) !important;
 }

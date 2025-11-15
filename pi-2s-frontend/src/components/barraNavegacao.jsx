@@ -9,18 +9,37 @@ const BarraNavegacao = () => {
   return (
     <nav aria-label="Menu principal" role="navigation" className="main-nav">
       <div className="nav-left">
-        <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
           Home
         </NavLink>
-        <NavLink to="/consulta-despesas" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+
+        <NavLink
+          to="/consulta-despesas"
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
           Consultar Despesas
         </NavLink>
-        <NavLink to="/consulta-empenhos" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+
+        <NavLink
+          to="/consulta-empenhos"
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
           Consultar Empenhos
         </NavLink>
       </div>
 
       <div className="nav-right">
+        {/* BOTÃO 100% SINCRONIZADO */}
         <button
           onClick={toggleTheme}
           className="themeButton"
