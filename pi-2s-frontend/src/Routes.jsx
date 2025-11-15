@@ -5,13 +5,13 @@ import consultaEmpenhos from "./pages/consultaEmpenhos";
 
 const RotasSite = () => {
   return (
-    <BrowserRouter basename="/projetointegrador_2m">
+    <HashRouter >
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/consultar-despesas" element={<ConsultaDespesas />} />
         <Route path="/consultar-empenhos" element={<consultaEmpenhos />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
