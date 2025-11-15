@@ -5,7 +5,7 @@ import consultaEmpenhos from "./pages/consultaEmpenhos";
 
 const RotasSite = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/projetointegrador_2m">
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/consultar-despesas" element={<ConsultaDespesas />} />
